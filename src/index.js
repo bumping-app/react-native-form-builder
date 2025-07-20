@@ -7,23 +7,32 @@ import { Button } from 'react-native-elements';
 import { componentName, skipValidationForFields } from './constant';
 import { getComponent, getValidator } from './componentMap';
 
-export default function DynamicForm({ formTemplate, onSubmit, buttonStyles }) {
+export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, formValues = null }) {
   const [formFields, setFormFields] = useState({});
   const [isValidFormFields, setValid] = useState(false);
   const mandatoryFields = formTemplate.data.filter(data => data.is_mandatory);
 
   useEffect(() => {
     formTemplate.data.sort((a, b) => a.index - b.index);
-    setFormFields({
-      ...formFields,
-      ...setDefaultForFields()
-    });
-  }, []);
+
+    if (formValues) {
+      setFormFields(formValues);
+    } else {
+      setFormFields({
+        ...formFields,
+        ...setDefaultForFields()
+      });
+    }
+
+
+  }, [formValues]);
 
   useEffect(() => {
     const isValid = checkAllMandatoryFields();
     setValid(isValid);
   }, [JSON.stringify(formFields)]);
+
+
 
   const onChangeInputValue = (fieldName, inputType) => value => {
     setFormFields({
@@ -92,15 +101,15 @@ export default function DynamicForm({ formTemplate, onSubmit, buttonStyles }) {
         formTemplate && formTemplate.data.map(element => {
           const Component = getComponent(element.component);
           return Component && (
-          <Component
-            index={element.index}
-            name={element.field_name}
-            meta={element.meta}
-            style={element.style}
-            value={getValue(element)}
-            onChangeInputValue={onChangeInputValue(element.field_name, element.component)}
-            isMandatory={element.is_mandatory === 'true'}
-          />
+            <Component
+              index={element.index}
+              name={element.field_name}
+              meta={element.meta}
+              style={element.style}
+              value={getValue(element)}
+              onChangeInputValue={onChangeInputValue(element.field_name, element.component)}
+              isMandatory={element.is_mandatory === 'true'}
+            />
           );
         })
       }
