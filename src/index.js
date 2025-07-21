@@ -71,8 +71,10 @@ export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, form
 
   const getValue = element => formFields[element.field_name]?.value;
 
-  const onSumbitButtonPress = () => {
-    onSubmit(formFields);
+  const onSumbitButtonPress = (sendToTherapist = false) => {
+    
+      onSubmit(formFields, sendToTherapist);
+    
   };
 
   const checkAllMandatoryFields = () => {
@@ -113,13 +115,22 @@ export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, form
           );
         })
       }
+      <View style={{flexDirection:'row'}}>
       <Button
         accessibilityLabel="submit-button"
-        title="Submit"
+        title="Save"
         buttonStyle={[styles.button, buttonStyles]}
-        onPress={onSumbitButtonPress}
+        onPress={() => onSumbitButtonPress(false)}
         disabled={!isValidFormFields}
       />
+      <Button
+        accessibilityLabel="submit-button"
+        title="Save & Send to Therapist "
+        buttonStyle={[styles.button, buttonStyles]}
+        onPress={() => onSumbitButtonPress(true)}
+        disabled={!isValidFormFields}
+      />
+      </View>
     </View>
   );
 }
