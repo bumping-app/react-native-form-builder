@@ -7,7 +7,7 @@ import { Button } from 'react-native-elements';
 import { componentName, skipValidationForFields } from './constant';
 import { getComponent, getValidator } from './componentMap';
 
-export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, formValues = null }) {
+export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, hideButtons=false, formValues = null }) {
   const [formFields, setFormFields] = useState({});
   const [isValidFormFields, setValid] = useState(false);
   const mandatoryFields = formTemplate.data.filter(data => data.is_mandatory);
@@ -72,9 +72,9 @@ export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, form
   const getValue = element => formFields[element.field_name]?.value;
 
   const onSumbitButtonPress = (sendToTherapist = false) => {
-    
-      onSubmit(formFields, sendToTherapist);
-    
+
+    onSubmit(formFields, sendToTherapist);
+
   };
 
   const checkAllMandatoryFields = () => {
@@ -115,22 +115,27 @@ export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, form
           );
         })
       }
-      <View style={{flexDirection:'row'}}>
-      <Button
-        accessibilityLabel="submit-button"
-        title="Save"
-        buttonStyle={[styles.button, buttonStyles]}
-        onPress={() => onSumbitButtonPress(false)}
-        disabled={!isValidFormFields}
-      />
-      <Button
-        accessibilityLabel="submit-button"
-        title="Save & Send to Therapist "
-        buttonStyle={[styles.button, buttonStyles]}
-        onPress={() => onSumbitButtonPress(true)}
-        disabled={!isValidFormFields}
-      />
-      </View>
+      {hideButtons ?
+        null :
+        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+          <Button
+            accessibilityLabel="submit-button"
+            title="Save"
+            buttonStyle={[styles.button, buttonStyles]}
+            titleStyle={styles.buttonText}
+            onPress={() => onSumbitButtonPress(false)}
+            disabled={!isValidFormFields}
+          />
+          <Button
+            accessibilityLabel="submit-button"
+            title="Save & Send to Therapist "
+            buttonStyle={[styles.button, buttonStyles]}
+            titleStyle={styles.buttonText}
+            onPress={() => onSumbitButtonPress(true)}
+            disabled={!isValidFormFields}
+          />
+        </View>
+      }
     </View>
   );
 }
@@ -140,9 +145,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    width: '40%',
+    // width: '40%',
+    flex: 1,
     alignSelf: 'center',
-    margin: 20
+    justifyContent: 'center',
+    margin: 20,
+    borderRadius: 10,
+  },
+  buttonText: {
+    fontFamily: 'Nunito-Regular',
+    fontSize: 16,
+    fontWeight: '600'
   }
 });
 
