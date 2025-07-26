@@ -7,7 +7,7 @@ import {
 
 export default function Rating(props) {
   const {
-    name, meta, style, onChangeInputValue, isMandatory
+    name, meta, style, value = 0, onChangeInputValue, isMandatory
   } = props;
 
   const recordRating = rating => onChangeInputValue(rating);
@@ -18,7 +18,7 @@ export default function Rating(props) {
         onFinishRating={recordRating}
         starContainerStyle={{ ...style, ...styles.rating }}
         count={meta.count || 5}
-        defaultRating={0}
+        defaultRating={value}
         showRating={false}
         size={30}
       />

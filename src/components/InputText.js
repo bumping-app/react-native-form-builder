@@ -19,7 +19,7 @@ export default function InputText(props) {
         underlineColorAndroid="transparent"
         onChangeText={onChangeInputValue}
         accessibilityLabel={`input-${meta.label}`}
-        editable
+        editable={meta.editable}
         placeholder={meta.placeholder}
         multiline={meta.multiline}
         numberOfLines={meta.numberOfLines}
