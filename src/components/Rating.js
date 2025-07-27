@@ -12,11 +12,11 @@ export default function Rating(props) {
 
   const recordRating = rating => onChangeInputValue(rating);
   return (
-    <View key={name}>
+    <View key={name} style={{borderWidth:0, alignItems:'flex-start'}}>
       <Text style={styles.text}>{`${meta.label} ${isMandatory ? '*' : ''}`}</Text>
       <AirbnbRating
         onFinishRating={recordRating}
-        starContainerStyle={{ ...style, ...styles.rating }}
+        starContainerStyle={[ style, styles.rating, {borderWidth:0, marginTop:15, marginLeft:15} ]}
         count={meta.count || 5}
         defaultRating={value}
         showRating={false}
