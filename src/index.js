@@ -117,12 +117,12 @@ export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, hide
       }
       {hideButtons ?
         null :
-        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop:40 }}>
           <Button
             accessibilityLabel="submit-button"
-            title="Save"
-            buttonStyle={[styles.button, buttonStyles]}
-            titleStyle={styles.buttonText}
+            title="Save Draft"
+            buttonStyle={[styles.button, buttonStyles, {backgroundColor:'transparent'}]}
+            titleStyle={[styles.buttonText, {color:'#EE7887'} ]}
             onPress={() => onSumbitButtonPress(false)}
             disabled={!isValidFormFields}
           />
