@@ -117,7 +117,7 @@ export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, hide
       }
       {hideButtons ?
         null :
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
           <Button
             accessibilityLabel="submit-button"
             title="Save"
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     justifyContent: 'center',
-    margin: 20,
+    margin: 10,
     borderRadius: 10,
   },
   buttonText: {
