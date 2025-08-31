@@ -13,8 +13,8 @@ export default function Radio(props) {
   const onPress = value => () => onChangeInputValue(value);
 
   return (
-    <View key={name} style={styles.container}>
-      <Text style={styles.heading}>{`${meta.text} ${isMandatory ? '*' : ''}`}</Text>
+    <View key={name} style={[styles.container, props.style]}>
+      <Text style={[styles.heading, meta.headingStyle]}>{`${meta.text} ${isMandatory ? '*' : ''}`}</Text>
       <View style={{flexDirection: meta.isHorizontal ? 'row' : 'column', borderWidth:0}}>
       {meta.data.map((item, index) => (
         <View key={index} style={styles.radioContainer}>
@@ -33,7 +33,7 @@ export default function Radio(props) {
                   : radioButton.unselected
               }
             />
-            <Text style={styles.text}>{item.label}</Text>
+            <Text style={[styles.text, meta.optionTextStyle]}>{item.label}</Text>
           </TouchableOpacity>
         </View>
       ))}
