@@ -15,6 +15,7 @@ export default function Radio(props) {
   return (
     <View key={name} style={styles.container}>
       <Text style={styles.heading}>{`${meta.text} ${isMandatory ? '*' : ''}`}</Text>
+      <View style={{flexDirection: meta.isHorizontal ? 'row' : 'column', borderWidth:0}}>
       {meta.data.map((item, index) => (
         <View key={index} style={styles.radioContainer}>
           <TouchableOpacity
@@ -36,6 +37,7 @@ export default function Radio(props) {
           </TouchableOpacity>
         </View>
       ))}
+      </View>
     </View>
   );
 }
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
   },
   radioContainer: {
     paddingVertical: 10,
-    width: '100%',
+    width: 'auto',
     height: 40,
     paddingLeft: 10,
   }
