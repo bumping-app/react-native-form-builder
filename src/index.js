@@ -7,7 +7,7 @@ import { Button } from 'react-native-elements';
 import { componentName, skipValidationForFields } from './constant';
 import { getComponent, getValidator } from './componentMap';
 
-export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, hideButtons=false, formValues = null }) {
+export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, hideButtons=false, formValues = null, isTherapistQuestionnaire = true }) {
   const [formFields, setFormFields] = useState({});
   const [isValidFormFields, setValid] = useState(false);
   const mandatoryFields = formTemplate.data.filter(data => data.is_mandatory);
@@ -116,7 +116,8 @@ export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, hide
         })
       }
       {hideButtons ?
-        null :
+        null : 
+          (isTherapistQuestionnaire ?
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop:40 }}>
           <Button
             accessibilityLabel="submit-button"
@@ -135,6 +136,19 @@ export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, hide
             disabled={!isValidFormFields}
           />
         </View>
+
+        :
+        <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop:40 }}>
+          <Button
+            accessibilityLabel="submit-button"
+            title="Save"
+            buttonStyle={[styles.button, buttonStyles, {backgroundColor:'transparent'}]}
+            titleStyle={[styles.buttonText, {color:'#EE7887'} ]}
+            onPress={() => onSumbitButtonPress(false)}
+            disabled={!isValidFormFields}
+          />
+        </View>
+          )
       }
     </View>
   );
