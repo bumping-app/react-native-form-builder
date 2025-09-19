@@ -12,7 +12,7 @@ export default function InputText(props) {
 
   return (
     <View key={name}>
-      <Text style={styles.text}>{`${meta.label} ${isMandatory ? '*' : ''}`}</Text>
+      <Text style={[styles.text, meta.textStyle]}>{`${meta.label} ${isMandatory ? '*' : ''}`}</Text>
       <TextInput
         style={{ ...styles.textBox(meta.multiline, meta.numberOfLines), ...style }}
         value={value || ''}

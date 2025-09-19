@@ -7,10 +7,31 @@ import { Button } from 'react-native-elements';
 import { componentName, skipValidationForFields } from './constant';
 import { getComponent, getValidator } from './componentMap';
 
-export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, hideButtons=false, formValues = null, isTherapistQuestionnaire = true }) {
+
+
+
+
+const  DynamicForm = React.forwardRef(
+  ({ 
+    formTemplate, onSubmit, buttonStyles, hideButtons=false, formValues = null, isTherapistQuestionnaire = true 
+  }, ref) => 
+  {
+  
+  
+  React.useImperativeHandle(ref, () => ({
+        submitForm: async function () {
+          onSumbitButtonPress();
+        },
+      }));
+  
+  
+  
   const [formFields, setFormFields] = useState({});
   const [isValidFormFields, setValid] = useState(false);
   const mandatoryFields = formTemplate.data.filter(data => data.is_mandatory);
+
+
+
 
   useEffect(() => {
     formTemplate.data.sort((a, b) => a.index - b.index);
@@ -152,7 +173,10 @@ export default function DynamicForm({ formTemplate, onSubmit, buttonStyles, hide
       }
     </View>
   );
-}
+});
+
+
+export default DynamicForm;
 
 const styles = StyleSheet.create({
   container: {
