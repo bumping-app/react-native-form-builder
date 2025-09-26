@@ -15,6 +15,7 @@ export default function Rating(props) {
     <View key={name} style={{borderWidth:0, alignItems:'flex-start'}}>
       <Text style={styles.text}>{`${meta.label} ${isMandatory ? '*' : ''}`}</Text>
       <AirbnbRating
+        isDisabled={meta.disabled}
         onFinishRating={recordRating}
         starContainerStyle={[ style, styles.rating, {borderWidth:0, marginTop:15, marginLeft:15} ]}
         count={meta.count || 5}
