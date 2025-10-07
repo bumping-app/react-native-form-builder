@@ -32,9 +32,9 @@ const DynamicForm = React.forwardRef(
         onSumbitButtonPress();
       },
       nextPage: function () {
-        if (currentIndex < formTemplate.data.length - 1) {
-          scrollToIndex(currentIndex + 1);
-          setCurrentIndex(currentIndex + 1);
+        if (activePage < formTemplate.data.length - 1) {
+          scrollToIndex(activePage + 1);
+          // setCurrentIndex(currentIndex + 1);
         }
       }
     }));
@@ -151,6 +151,7 @@ const DynamicForm = React.forwardRef(
     const scrollPosition = event.nativeEvent.contentOffset.x; // Current scroll position
     const currentPage = Math.round(scrollPosition / deviceWidth); // Calculate active page
     setActivePage(currentPage); // Update active page
+    console.log('FormBuilder:currentPage', currentPage);
     setCurrentPage && setCurrentPage(currentPage);
   };
 
