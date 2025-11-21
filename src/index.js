@@ -7,13 +7,11 @@ import { Button } from 'react-native-elements';
 import { componentName, skipValidationForFields } from './constant';
 import { getComponent, getValidator } from './componentMap';
 
-
-
-
-
 const  DynamicForm = React.forwardRef(
   ({ 
-    formTemplate, onSubmit, buttonStyles, hideButtons=false, formValues = null, isTherapistQuestionnaire = true 
+    formTemplate, onSubmit, buttonStyles, hideButtons=false, formValues = null, isTherapistQuestionnaire = true,
+    imgView,
+    inputStyle 
   }, ref) => 
   {
   
@@ -132,6 +130,8 @@ const  DynamicForm = React.forwardRef(
               value={getValue(element)}
               onChangeInputValue={onChangeInputValue(element.field_name, element.component)}
               isMandatory={element.is_mandatory === 'true'}
+              imgView={imgView}
+              inputStyle={inputStyle}
             />
           );
         })
