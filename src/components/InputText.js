@@ -16,7 +16,7 @@ export default function InputText(props) {
       <View style={styles.yellowMainView}>
         {imgView()}
         <View style={styles.yellowView}>
-        <Text style={[styles.text, styles.yellowTxt]}>{`${meta.label} ${isMandatory ? '*' : ''}`}</Text>
+        <Text style={[styles.yellowTxt]}>{`${meta.label} ${isMandatory ? '*' : ''}`}</Text>
         </View>
         </View> :
         <Text style={[styles.text, meta.textStyle]}>{`${meta.label} ${isMandatory ? '*' : ''}`}</Text>
@@ -54,11 +54,11 @@ const styles = StyleSheet.create({
   },
   yellowView: {
     backgroundColor: '#FDDE02',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     borderRadius: 20,
     borderTopLeftRadius: 0,
-    width: '75%',
+    width: '80%',
     marginLeft: 10,
   },
   yellowTxt: {
