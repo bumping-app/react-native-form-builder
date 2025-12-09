@@ -38,7 +38,13 @@ const DynamicForm = React.forwardRef(
           scrollToIndex(activePage + 1);
           // setCurrentIndex(currentIndex + 1);
         }
-      }
+      },
+      prevPage: function () {
+        if (activePage > 0) {
+          scrollToIndex(activePage - 1);
+          // setCurrentIndex(currentIndex + 1);
+        }
+      },
     }));
 
 
