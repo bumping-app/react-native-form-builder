@@ -41,6 +41,25 @@ const styles = StyleSheet.create({
     margin: 10,
     paddingLeft: 10
   }),
+  yellowMainView: {
+    flexDirection: 'row',
+  },
+  yellowView: {
+    backgroundColor: '#FDDE02',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderTopLeftRadius: 0,
+    width: '80%',
+    marginLeft: 10,
+  },
+  yellowTxt: {
+    fontFamily: 'Nunito-Regular',
+    fontSize: 20,
+    color: '#444444',
+    fontWeight: '600',
+    // fontStyle: 'italic',
+  }
 });
 
 InputText.propTypes = {
