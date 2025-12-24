@@ -23,7 +23,9 @@ const DynamicForm = React.forwardRef(
     formValues = null, 
     isTherapistQuestionnaire = true, 
     showCarousel = false,
-    setCurrentPage = null
+    setCurrentPage = null,
+    imgView,
+    inputStyle 
   }, ref) => {
 
 
@@ -36,7 +38,13 @@ const DynamicForm = React.forwardRef(
           scrollToIndex(activePage + 1);
           // setCurrentIndex(currentIndex + 1);
         }
-      }
+      },
+      prevPage: function () {
+        if (activePage > 0) {
+          scrollToIndex(activePage - 1);
+          // setCurrentIndex(currentIndex + 1);
+        }
+      },
     }));
 
 
@@ -190,6 +198,8 @@ const DynamicForm = React.forwardRef(
                     value={getValue(element)}
                     onChangeInputValue={onChangeInputValue(element.field_name, element.component)}
                     isMandatory={element.is_mandatory === 'true'}
+                    imgView={imgView}
+                    inputStyle={inputStyle}
                   />
                 );
               })
@@ -230,6 +240,8 @@ const DynamicForm = React.forwardRef(
                   value={getValue(element)}
                   onChangeInputValue={onChangeInputValue(element.field_name, element.component)}
                   isMandatory={element.is_mandatory === 'true'}
+                  imgView={imgView}
+                  inputStyle={inputStyle}
                 />
               );
             })

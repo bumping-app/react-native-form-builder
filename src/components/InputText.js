@@ -7,14 +7,22 @@ import { color } from '../styles';
 
 export default function InputText(props) {
   const {
-    name, value, meta, style, onChangeInputValue, isMandatory
+    name, value, meta, style, onChangeInputValue, isMandatory, imgView, inputStyle
   } = props;
 
   return (
     <View key={name} style={[meta.containerStyle ,{}]}>
-      <Text style={[styles.text, meta.textStyle]}>{`${meta.label} ${isMandatory ? '*' : ''}`}</Text>
+      {imgView ? 
+      <View style={styles.yellowMainView}>
+        {imgView()}
+        <View style={styles.yellowView}>
+        <Text style={[styles.yellowTxt]}>{`${meta.label} ${isMandatory ? '*' : ''}`}</Text>
+        </View>
+        </View> :
+        <Text style={[styles.text, meta.textStyle]}>{`${meta.label} ${isMandatory ? '*' : ''}`}</Text>
+      }
       <TextInput
-        style={{ ...styles.textBox(meta.multiline, meta.numberOfLines), ...style }}
+        style={{ ...styles.textBox(meta.multiline, meta.numberOfLines), ...style, ...inputStyle }}
         value={value || ''}
         underlineColorAndroid="transparent"
         onChangeText={onChangeInputValue}
