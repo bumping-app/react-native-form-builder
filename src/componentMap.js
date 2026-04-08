@@ -1,23 +1,26 @@
-import Image from './components/Image';
-import InputText from './components/InputText';
-import Rating from './components/Rating';
-import Checkbox from './components/Checkbox';
-import Radio from './components/Radio';
-import Dropdown from './components/Dropdown';
-import Datepicker from './components/DatePicker';
-import Text from './components/Text';
-import { componentName } from './constant';
+import Image from "./components/Image";
+import InputText from "./components/InputText";
+import Rating from "./components/Rating";
+import Checkbox from "./components/Checkbox";
+import Radio from "./components/Radio";
+import Dropdown from "./components/Dropdown";
+import Datepicker from "./components/DatePicker";
+import Text from "./components/Text";
+import { componentName } from "./constant";
+import ColorPickerList from "./components/ColorPickerList";
+import MusicList from "./components/MusicList";
+import MultiCheckList from "./components/MultiCheckList";
 
 const componentMap = {
   [componentName.IMAGE]: {
-    component: Image
+    component: Image,
   },
   [componentName.IMAGE_WITH_LINK]: {
     component: Image,
   },
   [componentName.TEXT_INPUT]: {
     component: InputText,
-    validator: inputTextValidator
+    validator: inputTextValidator,
   },
   [componentName.RATING]: {
     component: Rating,
@@ -39,17 +42,26 @@ const componentMap = {
   },
   [componentName.READ_ONLY_TEXT]: {
     component: Text,
-  }
+  },
+  [componentName.MULTI_CHECK_LIST]: {
+    component: MultiCheckList,
+  },
+  [componentName.COLOR_PICKER_LIST]: {
+    component: ColorPickerList,
+  },
+  [componentName.MUSIC_LIST]: {
+    component: MusicList,
+  },
 };
 
-export const getComponent = id => componentMap[id]?.component || null;
+export const getComponent = (id) => componentMap[id]?.component || null;
 
-export const getValidator = id => componentMap[id]?.validator || null;
+export const getValidator = (id) => componentMap[id]?.validator || null;
 
 function inputTextValidator(text, inputType) {
   const reg = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-\.])+.([A-Za-z]{2,4})$/;
 
-  if (inputType === 'email') {
+  if (inputType === "email") {
     return text && reg.test(text);
   }
 
