@@ -5,4 +5,5 @@ export const color = {
   YELLOW: '#EE7887',
   PINK: '#EE7887',
   GREEN_DARK: '#405112',
+  GREY_AE: '#AEAEAE',
 };

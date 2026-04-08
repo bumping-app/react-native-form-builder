@@ -1,4 +1,4 @@
-import { color } from "@coffeebeanslabs/react-native-form-builder/src/styles";
+
 import PropTypes from "prop-types";
 import React, { useRef, useState, useEffect } from "react";
 import {
@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { ListItem } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { color } from "../styles";
 
 const { height: deviceHeight } = Dimensions.get("screen");
 
@@ -24,7 +25,6 @@ const MultiCheckList = (props) => {
   } = props;
 
   const _listRef = useRef(null);
-  console.log("MultiCheckList: ", name, " value: ", value);
 
   const staticOptions = meta.data.map((item) => item.value || item.label);
 
@@ -113,14 +113,14 @@ const MultiCheckList = (props) => {
   };
 
   return (
-    <KeyboardAwareScrollView
-      keyboardDismissMode="on-drag"
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{ paddingBottom: 50 }}
-      extraScrollHeight={100}
-    >
-      <View key={name}>
-        <ListItem.Title style={styles.text}>{`${meta.text}`}</ListItem.Title>
+    <View key={name}>
+      <ListItem.Title style={styles.text}>{`${meta.text}`}</ListItem.Title>
+      <KeyboardAwareScrollView
+        keyboardDismissMode="on-drag"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 50 }}
+        extraScrollHeight={170}
+      >
         <FlatList
           ref={_listRef}
           data={meta.data}
@@ -147,8 +147,8 @@ const MultiCheckList = (props) => {
             />
           </View>
         ) : null}
-      </View>
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
+    </View>
   );
 };
 
