@@ -1,4 +1,3 @@
-
 import PropTypes from "prop-types";
 import React, { useRef, useState, useEffect } from "react";
 import {
@@ -34,10 +33,8 @@ const MultiCheckList = (props) => {
   const [showInp, setShowInp] = useState(!!customTextValue);
 
   useEffect(() => {
-    if (customTextValue) {
-      setShowInp(true);
-    }
-  }, [customTextValue]);
+    setShowInp(!!customTextValue);
+  }, [name, customTextValue]);
 
   const _handleItemCheck = (val) => {
     if (val === "other" && meta.showInput) {

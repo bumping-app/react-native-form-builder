@@ -1,3 +1,4 @@
+import { color } from "@coffeebeanslabs/react-native-form-builder/src/styles";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { Dimensions, FlatList, StyleSheet, View } from "react-native";
@@ -8,7 +9,6 @@ import ColorPicker, {
   PreviewText,
 } from "reanimated-color-picker";
 import Modal from "react-native-modal";
-import { color } from "../styles";
 
 const { height: deviceHeight, width: deviceWidth } = Dimensions.get("screen");
 
@@ -49,27 +49,34 @@ const ColorPickerList = (props) => {
       <ListItem
         bottomDivider
         pad={10}
-        key={item.label}
+        key={item.value}
         style={{ paddingVertical: 4 }}
         containerStyle={{
           padding: 6,
           borderRadius: 8,
+          backgroundColor: "#0d0b0b4c",
         }}
         onPress={() => {
-          _showModal(item.label);
+          _showModal(item.value);
         }}
       >
         <View
           style={[
             styles.colorCircle,
             {
-              backgroundColor: value?.[item.label] || color.WHITE,
+              backgroundColor: value?.[item.value] || color.WHITE,
             },
           ]}
         />
 
         <ListItem.Content>
-          <ListItem.Title style={{ textTransform: "capitalize", fontSize: 20 }}>
+          <ListItem.Title
+            style={{
+              textTransform: "capitalize",
+              fontSize: 20,
+              color: color.WHITE,
+            }}
+          >
             {item.label}
           </ListItem.Title>
         </ListItem.Content>
@@ -123,7 +130,7 @@ const ColorPickerList = (props) => {
       <FlatList
         data={meta.data}
         renderItem={_renderItem}
-        keyExtractor={(item) => `clr-${item.label}`}
+        keyExtractor={(item) => `clr-${item.value}`}
         style={{
           maxHeight: deviceHeight - 300,
           borderRadius: 8,
