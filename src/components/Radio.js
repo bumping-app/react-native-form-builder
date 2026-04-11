@@ -16,38 +16,40 @@ export default function Radio(props) {
   const onPress = value => () => onChangeInputValue(value);
 
   return (
-    <View key={name} style={[styles.container, props.style]}>
+    <View key={name} style={[styles.container,]}>
       <Text style={[styles.heading, meta.headingStyle]}>{`${meta.text} ${isMandatory ? '*' : ''}`}</Text>
-      
-      <ScrollView disabled={meta.isScrollable ? false : true} horizontal={meta.isHorizontal} 
-      showsHorizontalScrollIndicator={false}
-      style={{ borderWidth:0, width:'100%'}} 
-      contentContainerStyle={{ width:'auto'}}>
+      <View style={[props.style]}>
+        <ScrollView disabled={meta.isScrollable ? false : true} horizontal={meta.isHorizontal}
+          showsHorizontalScrollIndicator={false}
+          style={{ borderWidth: 0, width: '100%' }}
+          contentContainerStyle={{ width: 'auto' }}>
 
-      {meta.data.map((item, index) => (
-        <View key={index} style={styles.radioContainer} >
-          
-          <TouchableOpacity
-            onPressIn={onPress(item.value || item.label)}
-            hitSlop={styles.slop}
-            style={styles.buttonContainer}
-            key={index}
-            disabled={meta.disabled}
-          >
-            <Image
-              accessibilityLabel={`choose-option-${item.label}`}
-              style={styles.radioButtonImage}
-              source={
-                value === (item.value || item.label)
-                  ? radioButton.selected
-                  : radioButton.unselected
-              }
-            />
-            <Text style={[styles.text, meta.optionTextStyle]}>{item.label}</Text>
-          </TouchableOpacity>
-        </View>
-      ))}
-      </ScrollView>
+          {meta.data.map((item, index) => (
+            <View key={index} style={styles.radioContainer} >
+
+              <TouchableOpacity
+                onPressIn={onPress(item.value || item.label)}
+                hitSlop={styles.slop}
+                style={styles.buttonContainer}
+                key={index}
+                disabled={meta.disabled}
+              >
+                <Image
+                  accessibilityLabel={`choose-option-${item.label}`}
+                  style={styles.radioButtonImage}
+                  source={
+                    value === (item.value || item.label)
+                      ? radioButton.selected
+                      : radioButton.unselected
+                  }
+                />
+                <Text style={[styles.text, meta.optionTextStyle]}>{item.label}</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
+
+      </View>
     </View>
   );
 }

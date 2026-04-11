@@ -80,14 +80,14 @@ const MultiCheckList = (props) => {
 
     return (
       <ListItem
-        bottomDivider
+        // bottomDivider
         pad={10}
         key={item.label}
-        style={{ paddingVertical: 4 }}
-        containerStyle={{
+        style={[{ paddingVertical: 0 },  ]}
+        containerStyle={[{
           padding: 6,
           borderRadius: 8,
-        }}
+        }, style?.flatListItem]}
       >
         <ListItem.CheckBox
           iconType="material-community"
@@ -101,7 +101,7 @@ const MultiCheckList = (props) => {
         />
 
         <ListItem.Content>
-          <ListItem.Title style={{ textTransform: "capitalize" }}>
+          <ListItem.Title style={[{ textTransform: "capitalize" }, style?.flatListItemText]}>
             {item.label}
           </ListItem.Title>
         </ListItem.Content>
@@ -123,10 +123,11 @@ const MultiCheckList = (props) => {
           data={meta.data}
           renderItem={_renderItem}
           keyExtractor={(item) => `opt-${item.label}`}
-          style={{
+          style={[{
             maxHeight: showInp ? deviceHeight - 400 : deviceHeight - 300,
             borderRadius: 8,
-          }}
+             
+          }, style?.flatList ]}
         />
 
         {showInp ? (

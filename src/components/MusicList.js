@@ -7,20 +7,21 @@ import { color } from "../styles";
 const { height: deviceHeight } = Dimensions.get("screen");
 
 const MusicList = (props) => {
-  const { name, meta, value = {}, onChangeInputValue } = props;
+  const { name, meta, value = {}, onChangeInputValue, style } = props;
 
   const _renderItem = ({ item }) => {
     return (
       <ListItem
-        bottomDivider
+        // bottomDivider
         pad={10}
         key={item.label}
         style={{ paddingVertical: 4 }}
-        containerStyle={{
+        containerStyle={[{
           padding: 6,
           borderRadius: 8,
-          backgroundColor: value.id === item.id ? color.PINK : color.WHITE,
-        }}
+          
+        }, style?.flatListItem,
+        {backgroundColor: value.id === item.id ? color.PINK : 'transparent',} ]}
         onPress={() => {
           onChangeInputValue({ id: item.id, url: item.url });
         }}
@@ -40,20 +41,20 @@ const MusicList = (props) => {
 
         <ListItem.Content>
           <ListItem.Title
-            style={{
+            style={[{
               textTransform: "capitalize",
               fontSize: 20,
-              color: value.id === item.id ? color.WHITE : color.BLACK,
-            }}
+              color: color.WHITE, // value.id === item.id ? color.WHITE : color.BLACK,
+            },style?.flatListItemText, {fontSize:20, fontWeight: '600'} ]}
           >
             {item.name}
           </ListItem.Title>
           <ListItem.Title
-            style={{
+            style={[{
               textTransform: "capitalize",
               fontSize: 16,
-              color: value.id === item.id ? color.WHITE : color.GREY,
-            }}
+              // color: color.GREY_AE, // value.id === item.id ? color.WHITE : color.GREY,
+            },style?.flatListItemText ]}
           >
             {item.artist}
           </ListItem.Title>
@@ -70,10 +71,10 @@ const MusicList = (props) => {
         data={meta.data}
         renderItem={_renderItem}
         keyExtractor={(item) => `clr-${item.id}`}
-        style={{
+        style={[{
           maxHeight: deviceHeight - 300,
           borderRadius: 8,
-        }}
+        }, style?.flatList ]}
       />
     </View>
   );

@@ -47,14 +47,14 @@ const ColorPickerList = (props) => {
   const _renderItem = ({ item }) => {
     return (
       <ListItem
-        bottomDivider
+        // bottomDivider
         pad={10}
         key={item.value}
         style={{ paddingVertical: 4 }}
         containerStyle={{
           padding: 6,
           borderRadius: 8,
-          backgroundColor: "#0d0b0b4c",
+          backgroundColor: "transparent",
         }}
         onPress={() => {
           _showModal(item.value);
@@ -66,16 +66,17 @@ const ColorPickerList = (props) => {
             {
               backgroundColor: value?.[item.value] || color.WHITE,
             },
+            // style?.flatListItem
           ]}
         />
 
         <ListItem.Content>
           <ListItem.Title
-            style={{
+            style={[{
               textTransform: "capitalize",
               fontSize: 20,
               color: color.WHITE,
-            }}
+            }, style?.flatListItemText ]}
           >
             {item.label}
           </ListItem.Title>
@@ -131,10 +132,10 @@ const ColorPickerList = (props) => {
         data={meta.data}
         renderItem={_renderItem}
         keyExtractor={(item) => `clr-${item.value}`}
-        style={{
+        style={[{
           maxHeight: deviceHeight - 300,
           borderRadius: 8,
-        }}
+        }, style?.flatList ]}
       />
     </View>
   );

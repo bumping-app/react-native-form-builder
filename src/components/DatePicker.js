@@ -19,6 +19,7 @@ export default function Datepicker(props) {
       <ReactDatePicker
         key={name}
         style={styles.date}
+        customStyles={meta.customStyles}
         date={value}
         mode={meta.isDateTime ? "datetime" : "date"}
         format={meta.isDateTime ? DEFAULT_DATETIME_FORMAT : DEFAULT_DATE_FORMAT}
