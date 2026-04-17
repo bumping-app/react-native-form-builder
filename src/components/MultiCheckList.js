@@ -21,6 +21,7 @@ const MultiCheckList = (props) => {
     onChangeInputValue,
     style,
     inputStyle,
+    isMandatory,
   } = props;
 
   const _listRef = useRef(null);
@@ -83,11 +84,17 @@ const MultiCheckList = (props) => {
         // bottomDivider
         pad={10}
         key={item.label}
-        style={[{ paddingVertical: 0 },  ]}
-        containerStyle={[{
-          padding: 6,
-          borderRadius: 8,
-        }, style?.flatListItem]}
+        style={[{ paddingVertical: 0 }]}
+        containerStyle={[
+          {
+            padding: 6,
+            borderRadius: 8,
+          },
+          style?.flatListItem,
+        ]}
+        onPress={() => {
+          _handleItemCheck(itemVal);
+        }}
       >
         <ListItem.CheckBox
           iconType="material-community"
@@ -101,7 +108,9 @@ const MultiCheckList = (props) => {
         />
 
         <ListItem.Content>
-          <ListItem.Title style={[{ textTransform: "capitalize" }, style?.flatListItemText]}>
+          <ListItem.Title
+            style={[{ textTransform: "capitalize" }, style?.flatListItemText]}
+          >
             {item.label}
           </ListItem.Title>
         </ListItem.Content>
@@ -111,7 +120,9 @@ const MultiCheckList = (props) => {
 
   return (
     <View key={name}>
-      <ListItem.Title style={styles.text}>{`${meta.text}`}</ListItem.Title>
+      <ListItem.Title style={styles.text}>
+        {`${meta.text} ${isMandatory ? "*" : ""}`}
+      </ListItem.Title>
       <KeyboardAwareScrollView
         keyboardDismissMode="on-drag"
         showsVerticalScrollIndicator={false}
@@ -123,11 +134,13 @@ const MultiCheckList = (props) => {
           data={meta.data}
           renderItem={_renderItem}
           keyExtractor={(item) => `opt-${item.label}`}
-          style={[{
-            maxHeight: showInp ? deviceHeight - 400 : deviceHeight - 300,
-            borderRadius: 8,
-             
-          }, style?.flatList ]}
+          style={[
+            {
+              maxHeight: showInp ? deviceHeight - 400 : deviceHeight - 300,
+              borderRadius: 8,
+            },
+            style?.flatList,
+          ]}
         />
 
         {showInp ? (
