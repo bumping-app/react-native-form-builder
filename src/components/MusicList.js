@@ -16,14 +16,23 @@ const MusicList = (props) => {
         pad={10}
         key={item.label}
         style={{ paddingVertical: 4 }}
-        containerStyle={[{
-          padding: 6,
-          borderRadius: 8,
-          
-        }, style?.flatListItem,
-        {backgroundColor: value.id === item.id ? color.PINK : 'transparent',} ]}
+        containerStyle={[
+          {
+            padding: 6,
+            borderRadius: 8,
+          },
+          style?.flatListItem,
+          {
+            backgroundColor: value.id === item.id ? color.PINK : "transparent",
+          },
+        ]}
         onPress={() => {
-          onChangeInputValue({ id: item.id, url: item.url });
+          onChangeInputValue({
+            id: item.id,
+            url: item.url,
+            name: item.name,
+            artist: item.artist,
+          });
         }}
       >
         <Image
@@ -41,20 +50,27 @@ const MusicList = (props) => {
 
         <ListItem.Content>
           <ListItem.Title
-            style={[{
-              textTransform: "capitalize",
-              fontSize: 20,
-              color: color.WHITE, // value.id === item.id ? color.WHITE : color.BLACK,
-            },style?.flatListItemText, {fontSize:20, fontWeight: '600'} ]}
+            style={[
+              {
+                textTransform: "capitalize",
+                fontSize: 20,
+                color: color.WHITE, // value.id === item.id ? color.WHITE : color.BLACK,
+              },
+              style?.flatListItemText,
+              { fontSize: 20, fontWeight: "600" },
+            ]}
           >
             {item.name}
           </ListItem.Title>
           <ListItem.Title
-            style={[{
-              textTransform: "capitalize",
-              fontSize: 16,
-              // color: color.GREY_AE, // value.id === item.id ? color.WHITE : color.GREY,
-            },style?.flatListItemText ]}
+            style={[
+              {
+                textTransform: "capitalize",
+                fontSize: 16,
+                // color: color.GREY_AE, // value.id === item.id ? color.WHITE : color.GREY,
+              },
+              style?.flatListItemText,
+            ]}
           >
             {item.artist}
           </ListItem.Title>
@@ -71,10 +87,13 @@ const MusicList = (props) => {
         data={meta.data}
         renderItem={_renderItem}
         keyExtractor={(item) => `clr-${item.id}`}
-        style={[{
-          maxHeight: deviceHeight - 300,
-          borderRadius: 8,
-        }, style?.flatList ]}
+        style={[
+          {
+            maxHeight: deviceHeight - 300,
+            borderRadius: 8,
+          },
+          style?.flatList,
+        ]}
       />
     </View>
   );
