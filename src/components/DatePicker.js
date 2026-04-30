@@ -27,6 +27,8 @@ export default function Datepicker(props) {
         cancelBtnText={CANCEL_BUTTON_TEXT}
         onDateChange={onChangeInputValue}
         disabled={meta.disabled === true ? true : false}
+        maxDate={meta.maxDate}
+        minDate={meta.minDate}
       />
     </View>
   );
