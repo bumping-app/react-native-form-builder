@@ -8,8 +8,13 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  FlatList,
+  Dimensions,
 } from "react-native";
 import { radioButton } from "../constant";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
+const { height: deviceHeight } = Dimensions.get("screen");
 
 export default function Radio(props) {
   const {
@@ -51,6 +56,35 @@ export default function Radio(props) {
     }
   };
 
+  const _renderItem = ({ item, index }) => {
+    const itemVal = String(item.value || item.label);
+
+    let isSelected = safeValue === itemVal;
+
+    // Force the 'other' radio to show as selected if the user has typed custom text
+    if (itemVal === "other" && isOtherActive) {
+      isSelected = true;
+    }
+
+    return (
+      <View key={index} style={styles.radioContainer}>
+        <TouchableOpacity
+          onPress={onPress(itemVal)}
+          hitSlop={styles.slop}
+          style={styles.buttonContainer}
+          disabled={meta.disabled}
+        >
+          <Image
+            accessibilityLabel={`choose-option-${item.label}`}
+            style={styles.radioButtonImage}
+            source={isSelected ? radioButton.selected : radioButton.unselected}
+          />
+          <Text style={[styles.text, meta.optionTextStyle]}>{item.label}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <View key={name} style={[styles.container]}>
       <Text style={[styles.heading, meta.headingStyle]}>
@@ -58,62 +92,44 @@ export default function Radio(props) {
       </Text>
 
       <View style={[style]}>
-        <ScrollView
-          ref={scrollViewRef}
-          disabled={!meta.isScrollable}
-          horizontal={meta.isHorizontal}
-          showsHorizontalScrollIndicator={false}
-          style={{ borderWidth: 0, width: "100%" }}
-          contentContainerStyle={{ width: "auto" }}
-          keyboardShouldPersistTaps="handled"
+        <KeyboardAwareScrollView
+          keyboardDismissMode="on-drag"
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 50 }}
+          // extraScrollHeight={170}
         >
-          {meta.data.map((item, index) => {
-            const itemVal = String(item.value || item.label);
+          <FlatList
+            ref={scrollViewRef}
+            data={meta.data}
+            renderItem={_renderItem}
+            keyExtractor={(item) => `opt-${item.label}`}
+            style={[
+              {
+                borderRadius: 8,
+              },
+              style?.flatList,
+            ]}
+            disabled={!meta.isScrollable}
+            horizontal={meta.isHorizontal}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ width: "auto" }}
+            keyboardShouldPersistTaps="handled"
+          />
 
-            let isSelected = safeValue === itemVal;
-
-            // Force the 'other' radio to show as selected if the user has typed custom text
-            if (itemVal === "other" && isOtherActive) {
-              isSelected = true;
-            }
-
-            return (
-              <View key={index} style={styles.radioContainer}>
-                <TouchableOpacity
-                  onPress={onPress(itemVal)}
-                  hitSlop={styles.slop}
-                  style={styles.buttonContainer}
-                  disabled={meta.disabled}
-                >
-                  <Image
-                    accessibilityLabel={`choose-option-${item.label}`}
-                    style={styles.radioButtonImage}
-                    source={
-                      isSelected ? radioButton.selected : radioButton.unselected
-                    }
-                  />
-                  <Text style={[styles.text, meta.optionTextStyle]}>
-                    {item.label}
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            );
-          })}
-        </ScrollView>
-
-        {isOtherActive && meta.showInput && (
-          <View>
-            <TextInput
-              style={[styles.textBox, inputStyle]}
-              value={displayCustomText}
-              onChangeText={handleCustomTextChange}
-              placeholder={meta.text || "Please specify"}
-              multiline={meta.multiline}
-              numberOfLines={2}
-              underlineColorAndroid="transparent"
-            />
-          </View>
-        )}
+          {isOtherActive && meta.showInput && (
+            <View>
+              <TextInput
+                style={[styles.textBox, inputStyle]}
+                value={displayCustomText}
+                onChangeText={handleCustomTextChange}
+                placeholder={meta.text || "Please specify"}
+                multiline={meta.multiline}
+                numberOfLines={2}
+                underlineColorAndroid="transparent"
+              />
+            </View>
+          )}
+        </KeyboardAwareScrollView>
       </View>
     </View>
   );

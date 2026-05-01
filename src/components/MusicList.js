@@ -23,7 +23,7 @@ const MusicList = (props) => {
           },
           style?.flatListItem,
           {
-            backgroundColor: value.id === item.id ? color.PINK : "transparent",
+            backgroundColor: value?.id === item.id ? color.PINK : "transparent",
           },
         ]}
         onPress={() => {
