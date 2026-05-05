@@ -1,24 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { View, StyleSheet, Text } from 'react-native';
-import ReactDatePicker from 'react-native-datepicker';
+import React from "react";
+import PropTypes from "prop-types";
+import { View, StyleSheet, Text } from "react-native";
+import ReactDatePicker from "react-native-datepicker";
 
-const DEFAULT_DATETIME_FORMAT = 'YYYY-MM-DD h:mm a';
-const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
-const CONFIRM_BUTTON_TEXT = 'Confirm';
-const CANCEL_BUTTON_TEXT = 'Cancel';
+const DEFAULT_DATETIME_FORMAT = "YYYY-MM-DD h:mm a";
+const DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
+const CONFIRM_BUTTON_TEXT = "Confirm";
+const CANCEL_BUTTON_TEXT = "Cancel";
 
 export default function Datepicker(props) {
-  const {
-    name, value, meta, style, onChangeInputValue, isMandatory
-  } = props;
+  const { name, value, meta, style, onChangeInputValue, isMandatory } = props;
 
   return (
     <View style={style}>
-      <Text style={styles.text}>{`${meta.text || meta.title} ${isMandatory ? '*' : ''}`}</Text>
+      <Text
+        style={[styles.text, meta.labelStyle]}
+      >{`${meta.text || meta.title} ${isMandatory ? "*" : ""}`}</Text>
       <ReactDatePicker
         key={name}
         style={styles.date}
+        customStyles={meta.customStyles}
         date={value}
         mode={meta.isDateTime ? "datetime" : "date"}
         format={meta.isDateTime ? DEFAULT_DATETIME_FORMAT : DEFAULT_DATE_FORMAT}
@@ -26,6 +27,8 @@ export default function Datepicker(props) {
         cancelBtnText={CANCEL_BUTTON_TEXT}
         onDateChange={onChangeInputValue}
         disabled={meta.disabled === true ? true : false}
+        maxDate={meta.maxDate}
+        minDate={meta.minDate}
       />
     </View>
   );
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   date: {
-    width: '97%',
+    width: "97%",
     marginLeft: 10,
   },
 });
@@ -47,5 +50,5 @@ Datepicker.propTypes = {
   value: PropTypes.string,
   style: PropTypes.object,
   onChangeInputValue: PropTypes.func,
-  isMandatory: PropTypes.bool
+  isMandatory: PropTypes.bool,
 };

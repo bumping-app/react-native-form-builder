@@ -1,20 +1,27 @@
 export const componentName = {
-  CHECKBOX: 'input-checkbox',
-  DATE_PICKER: 'input-date',
-  DROPDOWN: 'input-dropdown',
-  IMAGE_WITH_LINK: 'image-with-link',
-  IMAGE: 'image',
-  RADIO: 'input-radio',
-  RATING: 'rating',
-  READ_ONLY_TEXT: 'read-only-text',
-  TEXT_AREA: 'input-textarea',
-  TEXT_INPUT: 'input-text'
+  CHECKBOX: "input-checkbox",
+  DATE_PICKER: "input-date",
+  DROPDOWN: "input-dropdown",
+  IMAGE_WITH_LINK: "image-with-link",
+  IMAGE: "image",
+  RADIO: "input-radio",
+  RATING: "rating",
+  READ_ONLY_TEXT: "read-only-text",
+  TEXT_AREA: "input-textarea",
+  TEXT_INPUT: "input-text",
+  MULTI_CHECK_LIST: "multi-check-list",
+  COLOR_PICKER_LIST: "color-picker-list",
+  MUSIC_LIST: "music-list",
 };
 
 export const radioButton = {
-  selected: require('./assets/selectedRadio.png'),
-  unselected: require('./assets/unselectedRadio.png')
+  selected: require("./assets/selectedRadio.png"),
+  unselected: require("./assets/unselectedRadio.png"),
 };
 
 // TODO: Need to remove isMandatory for below fields from template json.
-export const skipValidationForFields = ['image', 'image-with-link', 'read-only-text'];
+export const skipValidationForFields = [
+  "image",
+  "image-with-link",
+  "read-only-text",
+];

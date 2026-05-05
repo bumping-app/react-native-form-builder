@@ -6,7 +6,7 @@ export default function Text(props) {
   const { name, meta, style } = props;
 
   return (
-    <View key={name}>
+    <View key={name} style={{ ...style,  }}>
       <ReactText style={{ ...style, ...styles.text }}>{meta.text}</ReactText>
     </View>
   );
@@ -15,7 +15,7 @@ export default function Text(props) {
 const styles = StyleSheet.create({
   text: {
     marginLeft: 10,
-    marginTop: 10
+    marginTop: 0
   },
 });
 

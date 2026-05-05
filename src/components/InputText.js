@@ -31,6 +31,7 @@ export default function InputText(props) {
         placeholder={meta.placeholder}
         multiline={meta.multiline}
         numberOfLines={meta.numberOfLines}
+        placeholderTextColor={meta.placeholderTextColor}
       />
     </View>
   );

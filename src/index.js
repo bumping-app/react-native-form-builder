@@ -25,7 +25,8 @@ const DynamicForm = React.forwardRef(
     showCarousel = false,
     setCurrentPage = null,
     imgView,
-    inputStyle 
+    inputStyle,
+    onValueChange
   }, ref) => {
 
 
@@ -98,6 +99,10 @@ const DynamicForm = React.forwardRef(
           inputType,
         }
       });
+
+      if (onValueChange) {
+        onValueChange(fieldName, value);
+      }
     };
 
     const setDefaultForFields = () => {
