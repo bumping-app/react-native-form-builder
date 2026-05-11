@@ -96,7 +96,8 @@ export default function Radio(props) {
           keyboardDismissMode="on-drag"
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 50 }}
-          // extraScrollHeight={170}
+          extraScrollHeight={0}
+          enableAutomaticScroll={meta.data && meta.data.length >= 4}
         >
           <FlatList
             ref={scrollViewRef}
@@ -112,6 +113,7 @@ export default function Radio(props) {
             disabled={!meta.isScrollable}
             horizontal={meta.isHorizontal}
             showsHorizontalScrollIndicator={false}
+            // style={{ borderWidth: 0, width: "100%" }}
             contentContainerStyle={{ width: "auto" }}
             keyboardShouldPersistTaps="handled"
           />
