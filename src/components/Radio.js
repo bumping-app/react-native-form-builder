@@ -96,7 +96,8 @@ export default function Radio(props) {
           keyboardDismissMode="on-drag"
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 50 }}
-          // extraScrollHeight={170}
+          extraScrollHeight={0}
+          enableAutomaticScroll={meta.data && meta.data.length >= 4}
         >
           <FlatList
             ref={scrollViewRef}
@@ -112,6 +113,7 @@ export default function Radio(props) {
             disabled={!meta.isScrollable}
             horizontal={meta.isHorizontal}
             showsHorizontalScrollIndicator={false}
+            // style={{ borderWidth: 0, width: "100%" }}
             contentContainerStyle={{ width: "auto" }}
             keyboardShouldPersistTaps="handled"
           />
@@ -141,6 +143,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
+    alignItems: "flex-start",
+    paddingRight: 15,
   },
   radioButtonImage: {
     height: 20,
@@ -149,6 +153,7 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingLeft: 10,
+    flex: 1,
   },
   heading: {
     margin: 10,
@@ -162,7 +167,7 @@ const styles = StyleSheet.create({
   radioContainer: {
     paddingVertical: 10,
     width: "auto",
-    height: 40,
+    minHeight: 40,
     paddingLeft: 10,
   },
   textBox: {

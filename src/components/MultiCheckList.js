@@ -89,6 +89,7 @@ const MultiCheckList = (props) => {
           {
             padding: 6,
             borderRadius: 8,
+            alignItems: 'flex-start'
           },
           style?.flatListItem,
         ]}
@@ -128,6 +129,7 @@ const MultiCheckList = (props) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 50 }}
         extraScrollHeight={170}
+        // extraScrollHeight={(meta.data && meta.data.length >= 4) ? 170 : 20}
       >
         <FlatList
           ref={_listRef}
@@ -141,6 +143,9 @@ const MultiCheckList = (props) => {
             },
             style?.flatList,
           ]}
+          contentContainerStyle={{ 
+             paddingBottom: 20
+          }}
         />
 
         {showInp ? (
