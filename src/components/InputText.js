@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito-Regular',
     fontSize: 20,
     color: '#444444',
-    fontWeight: '600',
+    fontWeight: '400',
     // fontStyle: 'italic',
   }
 });
