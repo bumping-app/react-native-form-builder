@@ -33,6 +33,8 @@ export default function InputText(props) {
         numberOfLines={meta.numberOfLines}
         placeholderTextColor={meta.placeholderTextColor}
       />
+      {meta.error ? <Text style={[styles.error, meta.errorStyle]}>{meta.error}</Text>: null}
+      {meta.note ? <Text style={[styles.text, meta.noteStyle]}>{meta.note}</Text>: null}
     </View>
   );
 }
@@ -41,6 +43,13 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 10,
     marginTop: 10
+  },
+  note:{
+    marginLeft: 10,
+  },
+  error:{
+    marginLeft: 10,
+    marginBottom: 10
   },
   textBox: (multiline, numberOfLines) => ({
     height: !multiline ? 40 : 40 * numberOfLines,

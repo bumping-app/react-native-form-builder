@@ -30,6 +30,7 @@ export default function Datepicker(props) {
         maxDate={meta.maxDate}
         minDate={meta.minDate}
       />
+      {meta.error ? <Text style={[styles.error, meta.errorStyle]}>{meta.error}</Text>: null}
     </View>
   );
 }
@@ -41,6 +42,10 @@ const styles = StyleSheet.create({
   date: {
     width: "97%",
     marginLeft: 10,
+  },
+  error:{
+    marginLeft: 10,
+    marginTop: 10
   },
 });
 
